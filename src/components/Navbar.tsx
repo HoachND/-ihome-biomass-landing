@@ -33,7 +33,7 @@ export default function Navbar() {
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur-md shadow-lg py-3" : "bg-transparent py-5"}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
-          <div className="flex-shrink-0 flex items-center mr-8">
+          <div className="flex-shrink-0 flex items-center md:mr-8">
             <a href="#" className="flex items-center gap-2">
               <img src="/images/logo-ihome.png" alt="IHOME Logo" className="h-16 md:h-20 w-auto object-contain" />
               <span className={`font-black text-2xl tracking-tight hidden sm:block whitespace-nowrap ${scrolled ? "text-slate-900" : "text-white"}`}>
@@ -65,11 +65,11 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden flex items-center gap-4">
-            <button onClick={toggleLanguage} className={`text-sm font-bold ${scrolled ? "text-slate-800" : "text-white"}`}>
+          <div className="flex md:hidden items-center gap-3">
+            <button onClick={toggleLanguage} className={`text-sm font-bold px-2 py-1 rounded border ${scrolled ? "text-slate-800 border-slate-300" : "text-white border-white/30"}`}>
               {language === "vi" ? "EN" : "VI"}
             </button>
-            <button onClick={() => setIsOpen(!isOpen)} className={`${scrolled ? "text-slate-900" : "text-white"} hover:text-orange-500 p-1`}>
+            <button onClick={() => setIsOpen(!isOpen)} className={`${scrolled ? "text-slate-900" : "text-white"} p-1`}>
               {isOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
