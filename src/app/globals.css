@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+html {
+  font-size: 18px;
+}
+
+:root {
+  --primary: #F97316;
+  --primary-dark: #EA580C;
+  --accent: #84CC16;
+  --accent-dark: #65A30D;
+  --dark: #171717;
+  --darker: #0a0a0a;
+}
+
+* { scroll-behavior: smooth; }
+
+body {
+  font-family: "Be Vietnam Pro", "Inter", system-ui, sans-serif;
+}
+
+/* Custom scrollbar */
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 9999px; }
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Gradient text */
+.gradient-text-biomass {
+  background: linear-gradient(135deg, #F97316, #FACC15, #84CC16);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Biomass dark gradient background */
+.biomass-gradient-bg {
+  background: linear-gradient(135deg, #171717 0%, #1a1206 50%, #171717 100%);
+}
+
+/* Bento card hover */
+.bento-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.bento-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 60px rgba(249,115,22,0.15);
+  border-color: rgba(249,115,22,0.3);
+}
+
+/* Sun-ray animation (reused from VimSolar) */
+.sun-ray {
+  animation: pulse-glow 4s ease-in-out infinite;
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.1; transform: scale(1); }
+  50% { opacity: 0.2; transform: scale(1.05); }
+}
+
+/* Phone pulse ring */
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid #22c55e;
+  animation: ring-pulse 1.5s ease-out infinite;
+}
+@keyframes ring-pulse {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+/* Hide Next.js badge */
+[data-next-badge], body > div:last-child[style*="position: fixed"], nextjs-portal, #nextjs-portal { display: none !important; }

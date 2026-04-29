@@ -1,0 +1,173 @@
+"use client";
+import { createContext, useContext, useState, ReactNode } from "react";
+
+const translations: Record<string, Record<string, string>> = {
+  // Navbar
+  nav_home: { vi: "Trang chủ", en: "Home" },
+  nav_products: { vi: "Sản phẩm", en: "Products" },
+  nav_benefits: { vi: "Lợi ích", en: "Benefits" },
+  nav_factory: { vi: "Nhà máy", en: "Factory" },
+  nav_process: { vi: "Quy trình", en: "Process" },
+  nav_quote: { vi: "Báo giá", en: "Get Quote" },
+  nav_call: { vi: "Gọi ngay", en: "Call Now" },
+
+  // Hero
+  hero_badge: { vi: "🌿 Năng lượng sinh khối IHOME", en: "🌿 IHOME Biomass Energy" },
+  hero_title_1: { vi: "Năng Lượng Sạch", en: "Clean Energy" },
+  hero_title_2: { vi: "Cho", en: "For The" },
+  hero_title_3: { vi: "Tương Lai", en: "Future" },
+  hero_desc: { vi: "IHOME Việt Nam chuyên sản xuất và cung cấp nhiên liệu sinh khối chất lượng cao: viên nén gỗ, củi mùn cưa, phế phẩm nông sản. Giải pháp thay thế than đá hoàn hảo, giúp doanh nghiệp tiết kiệm chi phí và bảo vệ môi trường.", en: "IHOME Vietnam specializes in producing and supplying high-quality biomass fuel: wood pellets, sawdust briquettes, and agricultural waste. The perfect alternative to coal, helping businesses save costs and protect the environment." },
+  hero_cta: { vi: "Nhận Báo Giá Miễn Phí", en: "Get Free Quote" },
+  hero_cta2: { vi: "Xem Sản Phẩm", en: "View Products" },
+  hero_stat1: { vi: "Tấn/tháng", en: "Tons/month" },
+  hero_stat2: { vi: "Năm kinh nghiệm", en: "Years experience" },
+  hero_stat3: { vi: "Nguyên liệu tự nhiên", en: "Natural materials" },
+  hero_card1_title: { vi: "Tiết Kiệm Chi Phí", en: "Cost Savings" },
+  hero_card1_desc: { vi: "Giảm 30-50% chi phí nhiên liệu so với than đá, dầu FO", en: "Reduce fuel costs by 30-50% compared to coal and FO oil" },
+  hero_card2_title: { vi: "Tiêu Chuẩn Xuất Khẩu", en: "Export Standards" },
+  hero_card2_desc: { vi: "Đáp ứng tiêu chuẩn khắt khe của thị trường Nhật Bản, Hàn Quốc, EU", en: "Meet strict standards of Japan, Korea, and EU markets" },
+  hero_card3_title: { vi: "Bảo Vệ Môi Trường", en: "Environmental Protection" },
+  hero_card3_desc: { vi: "Giảm phát thải khí nhà kính, tận dụng phế phẩm nông lâm nghiệp", en: "Reduce greenhouse gas emissions, utilize agro-forestry waste" },
+
+  // Solutions (Products)
+  sol_badge: { vi: "Sản Phẩm Của Chúng Tôi", en: "Our Products" },
+  sol_title: { vi: "Giải Pháp Năng Lượng Sinh Khối IHOME", en: "IHOME Biomass Energy Solutions" },
+  sol_desc: { vi: "Đa dạng các loại nhiên liệu sinh khối chất lượng cao, phục vụ mọi nhu cầu lò hơi công nghiệp và dân dụng.", en: "A wide range of high-quality biomass fuels for all industrial and residential boiler needs." },
+  sol_consult: { vi: "Nhận báo giá →", en: "Get a quote →" },
+  sol_invest: { vi: "Nhiệt lượng:", en: "Calorific value:" },
+  sol_f1_1: { vi: "Độ ẩm < 8%", en: "Moisture < 8%" },
+  sol_f1_2: { vi: "Độ tro < 1.5%", en: "Ash < 1.5%" },
+  sol_f2_1: { vi: "Độ ẩm < 10%", en: "Moisture < 10%" },
+  sol_f2_2: { vi: "Độ tro < 2%", en: "Ash < 2%" },
+  sol_f2_3: { vi: "Cháy lâu, nhiệt đều", en: "Long burning, even heat" },
+  sol_f3_1: { vi: "Giá thành cực thấp", en: "Extremely low cost" },
+  sol_f3_2: { vi: "Nguồn cung dồi dào", en: "Abundant supply" },
+  sol_f3_3: { vi: "Tái chế nông nghiệp", en: "Agricultural recycling" },
+
+  // Benefits
+  ben_badge: { vi: "Tại Sao Chọn Sinh Khối?", en: "Why Choose Biomass?" },
+  ben_title: { vi: "Lợi Ích Vượt Trội Của Biomass", en: "Outstanding Benefits of Biomass" },
+  ben_desc: { vi: "Chuyển đổi sang năng lượng sinh khối không chỉ là xu hướng tất yếu mà còn mang lại những lợi ích kinh tế thiết thực cho doanh nghiệp.", en: "Transitioning to biomass energy is not only an inevitable trend but also brings practical economic benefits to businesses." },
+  ben_cta_text: { vi: "Đầu tư vào năng lượng xanh hôm nay, tiết kiệm chi phí nhiên liệu cho ngày mai.", en: "Invest in green energy today, save on fuel costs for tomorrow." },
+  ben_cta: { vi: "Liên Hệ Tư Vấn Chuyển Đổi Lò Hơi →", en: "Contact for Boiler Conversion Consulting →" },
+  ben_1_t: { vi: "Giảm Chi Phí Nhiên Liệu", en: "Reduce Fuel Costs" },
+  ben_1_d: { vi: "Chi phí vận hành lò hơi dùng biomass thấp hơn đáng kể so với than đá, dầu FO hay gas. Giúp tối ưu hóa giá thành sản xuất.", en: "Operating costs for biomass boilers are significantly lower than coal, FO oil, or gas. Helping optimize production costs." },
+  ben_1_s: { vi: "tiết kiệm/năm", en: "savings/year" },
+  ben_2_t: { vi: "Nhiệt Lượng Cao & Ổn Định", en: "High & Stable Heat" },
+  ben_2_d: { vi: "Viên nén và củi ép IHOME có độ ẩm thấp (<10%), độ tro thấp (<1.5%), đảm bảo nhiệt lượng cháy cao và ổn định liên tục.", en: "IHOME pellets and briquettes have low moisture (<10%), low ash (<1.5%), ensuring high and stable combustion heat." },
+  ben_2_s: { vi: "kcal/kg", en: "kcal/kg" },
+  ben_3_t: { vi: "Nguồn Cung Ổn Định", en: "Stable Supply" },
+  ben_3_d: { vi: "Hệ thống nhà máy công suất lớn và nguồn nguyên liệu dồi dào từ phế phẩm nông lâm nghiệp đảm bảo không đứt gãy chuỗi cung ứng.", en: "Large capacity factories and abundant raw materials from agro-forestry waste ensure an uninterrupted supply chain." },
+  ben_3_s: { vi: "tấn/tháng", en: "tons/month" },
+  ben_4_t: { vi: "Kéo Dài Tuổi Thọ Lò Hơi", en: "Extend Boiler Lifespan" },
+  ben_4_d: { vi: "Sinh khối cháy sạch, ít khói, ít tro bụi và không chứa lưu huỳnh, giúp bảo vệ ghi lò, ống lửa và giảm chi phí bảo trì.", en: "Biomass burns clean, with low smoke, low ash, and no sulfur, protecting boiler grates, tubes, and reducing maintenance costs." },
+  ben_4_s: { vi: "giảm chi phí bảo trì", en: "reduced maintenance cost" },
+  ben_5_t: { vi: "Bảo Vệ Môi Trường", en: "Environmental Protection" },
+  ben_5_d: { vi: "Là nguồn năng lượng tái tạo, sinh khối giúp giảm phát thải rác và khí thải nhà kính, thân thiện với môi trường làm việc.", en: "As a renewable energy source, biomass helps reduce waste and greenhouse gas emissions, creating a friendly working environment." },
+  ben_5_s: { vi: "carbon trung tính", en: "carbon neutral" },
+  ben_6_t: { vi: "Đáp Ứng Tiêu Chuẩn Xanh", en: "Meet Green Standards" },
+  ben_6_d: { vi: "Sử dụng năng lượng sinh khối giúp doanh nghiệp dễ dàng đạt các chứng chỉ xanh, ESG, tạo lợi thế khi xuất khẩu hàng hóa.", en: "Using biomass energy helps businesses easily achieve green certificates, ESG, creating advantages when exporting goods." },
+  ben_6_s: { vi: "chứng chỉ ESG", en: "ESG certification" },
+
+  // About
+  about_badge: { vi: "Về IHOME Việt Nam", en: "About IHOME Vietnam" },
+  about_title: { vi: "Nhà Sản Xuất Năng Lượng Sinh Khối Hàng Đầu", en: "Leading Biomass Energy Manufacturer" },
+  about_desc: { vi: "IHOME Việt Nam là thành viên của Tập đoàn Đầu tư VIMGROUP, đi tiên phong trong lĩnh vực sản xuất và cung ứng năng lượng sinh khối tại Việt Nam. Với hệ thống nhà máy hiện đại, chúng tôi biến phế phẩm nông lâm nghiệp thành nguồn nhiên liệu xanh, chất lượng cao, phục vụ thị trường nội địa và xuất khẩu.", en: "IHOME Vietnam is a member of VIMGROUP Investment Group, a pioneer in the production and supply of biomass energy in Vietnam. With modern factories, we turn agro-forestry waste into high-quality green fuel for domestic and export markets." },
+  about_ceo: { vi: "Giám đốc IHOME Việt Nam", en: "Director of IHOME Vietnam" },
+  about_quote: { vi: '"Chất lượng tạo niềm tin, Uy tín tạo thương hiệu"', en: '"Quality builds trust, Prestige builds brand"' },
+  about_ceo_name: { vi: "Ms Triệu Thúy", en: "Ms Trieu Thuy" },
+  about_f1_t: { vi: "Cam Kết Chất Lượng", en: "Quality Commitment" },
+  about_f1_d: { vi: "Kiểm định nghiêm ngặt từ nguyên liệu đầu vào đến thành phẩm.", en: "Strict testing from input materials to finished products." },
+  about_f2_t: { vi: "Tiên Phong Công Nghệ", en: "Technology Pioneer" },
+  about_f2_d: { vi: "Hệ thống dây chuyền ép viên, ép củi hiện đại nhất hiện nay.", en: "The most modern pellet and briquette pressing line system today." },
+  about_f3_t: { vi: "Trách Nhiệm Môi Trường", en: "Environmental Responsibility" },
+  about_f3_d: { vi: "Sứ mệnh phủ xanh ngành công nghiệp năng lượng Việt Nam.", en: "Mission to green the energy industry in Vietnam." },
+  about_vimgroup: { vi: "IHOME là thương hiệu chiến lược trực thuộc hệ sinh thái", en: "IHOME is a strategic brand under the ecosystem of" },
+
+  // Gallery
+  gal_badge: { vi: "Hình Ảnh Thực Tế", en: "Real Images" },
+  gal_title: { vi: "Sản Phẩm & Nhà Máy", en: "Products & Factory" },
+  gal_desc: { vi: "Khám phá quy mô sản xuất và các sản phẩm chất lượng cao của IHOME Việt Nam.", en: "Explore the production scale and high-quality products of IHOME Vietnam." },
+  gal_cat_all: { vi: "Tất cả", en: "All" },
+  gal_cat_products: { vi: "Sản Phẩm", en: "Products" },
+  gal_cat_factory: { vi: "Dây Chuyền", en: "Machinery" },
+  gal_modal_capacity: { vi: "Sản lượng", en: "Capacity" },
+  gal_modal_material: { vi: "Nguyên liệu", en: "Material" },
+  gal_modal_type: { vi: "Phân loại", en: "Category" },
+  gal_modal_cta: { vi: "Nhận Báo Giá Sản Phẩm Này", en: "Get Quote for This Product" },
+  gal_modal_desc: { vi: "Quý khách quan tâm đến sản phẩm này? Liên hệ ngay để nhận báo giá sỉ tốt nhất.", en: "Interested in this product? Contact us now for the best wholesale quote." },
+  gal_img1_t: { vi: "Mùn cưa rời, Dăm bào", en: "Loose sawdust, Shavings" },
+  gal_img1_d: { vi: "Đóng bao chuẩn 15kg", en: "Standard 15kg packaging" },
+  gal_img2_t: { vi: "Củi mùn cưa ép", en: "Sawdust briquettes" },
+  gal_img2_d: { vi: "Nhiệt lượng cao", en: "High calorific value" },
+  gal_img3_t: { vi: "Củi ép thanh tròn", en: "Round briquettes" },
+  gal_img3_d: { vi: "Thay thế than đá", en: "Coal alternative" },
+  gal_img4_t: { vi: "Kho chứa phế phẩm", en: "Waste storage" },
+  gal_img4_d: { vi: "Nguồn nguyên liệu dồi dào", en: "Abundant raw materials" },
+  gal_img5_t: { vi: "Hệ Thống Máy Ép", en: "Pressing System" },
+  gal_img5_d: { vi: "Công nghệ tiên tiến", en: "Advanced technology" },
+  gal_img6_t: { vi: "Dây chuyền ép củi mùn cưa", en: "Sawdust briquette line" },
+  gal_img6_d: { vi: "Công suất lớn", en: "Large capacity" },
+  gal_img7_t: { vi: "Hệ thống sấy tự động", en: "Automatic drying system" },
+  gal_img7_d: { vi: "Kiểm soát độ ẩm < 10%", en: "Moisture control < 10%" },
+  gal_img8_t: { vi: "Xưởng sản xuất", en: "Production workshop" },
+  gal_img8_d: { vi: "Quy mô rộng lớn", en: "Large scale" },
+
+  // Process
+  proc_badge: { vi: "Quy Trình Khép Kín", en: "Closed Process" },
+  proc_title: { vi: "Quy Trình Sản Xuất Hiện Đại", en: "Modern Production Process" },
+  proc_desc: { vi: "Từ thu gom nguyên liệu đến thành phẩm xuất xưởng, mọi công đoạn đều được kiểm soát chất lượng nghiêm ngặt.", en: "From raw material collection to finished products, every step is strictly quality controlled." },
+  proc_cta: { vi: "Tham Quan Nhà Máy →", en: "Visit Our Factory →" },
+  proc_1_t: { vi: "Thu Gom", en: "Collection" },
+  proc_1_d: { vi: "Thu gom phế phẩm nông lâm nghiệp (mùn cưa, dăm bào, củi nhánh) từ các nguồn đạt chuẩn FSC.", en: "Collect agro-forestry waste (sawdust, shavings, branch wood) from FSC-certified sources." },
+  proc_2_t: { vi: "Nghiền & Sàng", en: "Crushing & Screening" },
+  proc_2_d: { vi: "Nguyên liệu được nghiền nhỏ và qua hệ thống sàng lọc để loại bỏ tạp chất, kim loại.", en: "Materials are crushed and passed through a screening system to remove impurities and metals." },
+  proc_3_t: { vi: "Sấy Khô", en: "Drying" },
+  proc_3_d: { vi: "Đưa vào hệ thống sấy công nghiệp, đưa độ ẩm nguyên liệu xuống dưới mức 10%.", en: "Put into an industrial drying system, bringing material moisture below 10%." },
+  proc_4_t: { vi: "Ép & Làm Nguội", en: "Pressing & Cooling" },
+  proc_4_d: { vi: "Nguyên liệu được ép dưới áp suất cao thành viên nén/củi ép, sau đó làm nguội tự nhiên.", en: "Materials are pressed under high pressure into pellets/briquettes, then cooled naturally." },
+  proc_5_t: { vi: "Đóng Gói & Giao Hàng", en: "Packaging & Delivery" },
+  proc_5_d: { vi: "Đóng gói theo tiêu chuẩn (bao 15kg, bao jumbo 1 tấn) và phân phối đến tay khách hàng/cảng xuất khẩu.", en: "Packaged according to standards (15kg bags, 1-ton jumbo bags) and distributed to customers/export ports." },
+
+  // Contact Form
+  form_badge: { vi: "Liên Hệ Hợp Tác", en: "Contact for Cooperation" },
+  form_title: { vi: "Nhận Báo Giá Sỉ & Tư Vấn", en: "Get Wholesale Quote & Consulting" },
+  form_desc: { vi: "Để lại thông tin, đội ngũ IHOME sẽ liên hệ báo giá nhanh chóng và gửi mẫu sản phẩm miễn phí.", en: "Leave your information, the IHOME team will quickly contact you with a quote and send free product samples." },
+  form_name: { vi: "Họ và Tên *", en: "Full Name *" },
+  form_phone: { vi: "Số Điện Thoại *", en: "Phone Number *" },
+  form_email: { vi: "Email", en: "Email" },
+  form_type: { vi: "Sản Phẩm Quan Tâm", en: "Interested Product" },
+  form_submit: { vi: "NHẬN BÁO GIÁ NGAY 🌿", en: "GET QUOTE NOW 🌿" },
+  form_sending: { vi: "ĐANG GỬI...", en: "SENDING..." },
+  form_success_title: { vi: "Gửi Yêu Cầu Thành Công!", en: "Request Sent Successfully!" },
+  form_success_desc: { vi: "Cảm ơn quý khách đã quan tâm. Đội ngũ IHOME sẽ liên hệ trong thời gian sớm nhất.", en: "Thank you for your interest. The IHOME team will contact you shortly." },
+  form_messenger: { vi: "💬 Chat Messenger Ngay", en: "💬 Chat on Messenger" },
+  form_opt1: { vi: "Củi Vụn Làng Nghề", en: "Village Wood Scrap" },
+  form_opt2: { vi: "Củi Gỗ Mùn Cưa Ép", en: "Sawdust Briquettes" },
+  form_opt3: { vi: "Mùn cưa rời / dăm bào", en: "Loose Sawdust / Wood Shavings" },
+  form_opt4: { vi: "Củi Vụn Làng nghề", en: "Village Wood Scrap" },
+  form_opt5: { vi: "Khác", en: "Other" },
+  form_hotline: { vi: "Hotline 24/7", en: "Hotline 24/7" },
+  form_office: { vi: "Văn phòng đại diện", en: "Representative Office" },
+  form_factory: { vi: "Hệ thống nhà máy", en: "Factory System" },
+  form_secure: { vi: "🔒 Thông tin của bạn được bảo mật tuyệt đối", en: "🔒 Your information is completely secured" },
+
+  // Footer
+  footer_desc: { vi: "IHOME Việt Nam by VIMGROUP — Đơn vị tiên phong sản xuất và cung cấp năng lượng sinh khối (biomass) chất lượng cao tại Việt Nam.", en: "IHOME Vietnam by VIMGROUP — A pioneer in producing and supplying high-quality biomass energy in Vietnam." },
+  footer_links: { vi: "Chuyên Mục", en: "Quick Links" },
+  footer_contact: { vi: "Liên Hệ", en: "Contact" },
+  footer_office: { vi: "Văn phòng", en: "Office" },
+  footer_factory: { vi: "Nhà máy", en: "Factory" },
+  footer_credit: { vi: "Sáng tạo bởi VimAI — Thương hiệu công nghệ VIMGROUP", en: "Created by VimAI — VIMGROUP technology brand" },
+};
+
+type I18nCtx = { t: (key: string) => string; language: string; setLanguage: (l: string) => void };
+const I18nContext = createContext<I18nCtx>({ t: (k) => k, language: "vi", setLanguage: () => {} });
+
+export function I18nProvider({ children }: { children: ReactNode }) {
+  const [language, setLanguage] = useState("vi");
+  const t = (key: string) => translations[key]?.[language] || key;
+  return <I18nContext.Provider value={{ t, language, setLanguage }}>{children}</I18nContext.Provider>;
+}
+
+export const useI18n = () => useContext(I18nContext);
