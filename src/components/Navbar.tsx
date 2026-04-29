@@ -35,7 +35,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0 flex items-center md:mr-8">
             <a href="#" className="flex items-center gap-2">
-              <img src="/images/logo-ihome.png" alt="IHOME Logo" className="h-16 md:h-20 w-auto object-contain" />
+              <img src="/images/logo-ihome.png" alt="IHOME Logo" className="h-10 md:h-16 w-auto object-contain" />
               <span className={`font-black text-2xl tracking-tight hidden sm:block whitespace-nowrap ${scrolled ? "text-slate-900" : "text-white"}`}>
                 IHOME <span className="text-orange-500">VIỆT NAM</span>
               </span>

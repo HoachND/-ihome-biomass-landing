@@ -22,7 +22,7 @@ export default function Hero() {
               {t("hero_badge")}
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
-              {t("hero_title_1")}<br className="hidden sm:block" />
+              {t("hero_title_1")} <br className="hidden sm:block" />
               {t("hero_title_2")} <span className="gradient-text-biomass">{t("hero_title_3")}</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-300/90 mb-8 max-w-xl leading-relaxed font-light" dangerouslySetInnerHTML={{ __html: t("hero_desc") }} />
