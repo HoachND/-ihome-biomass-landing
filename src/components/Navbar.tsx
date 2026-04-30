@@ -43,7 +43,7 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6 flex-grow justify-end">
+          <div className="hidden lg:flex items-center space-x-6 flex-grow justify-end">
             <div className="flex space-x-6">
               {navLinks.map((link) => (
                 <a key={link.name} href={link.href} className={`font-bold text-lg whitespace-nowrap hover:text-orange-500 transition-colors ${scrolled ? "text-slate-700" : "text-white/90"}`}>
@@ -65,12 +65,26 @@ export default function Navbar() {
           </div>
 
           {/* Mobile menu button */}
-          <div className="flex md:hidden items-center gap-3">
-            <button onClick={toggleLanguage} className={`text-sm font-bold px-2 py-1 rounded border ${scrolled ? "text-slate-800 border-slate-300" : "text-white border-white/30"}`}>
+          <div className="flex lg:hidden items-center gap-2">
+            <button 
+              onClick={toggleLanguage} 
+              className={`text-xs font-extrabold px-2.5 py-1.5 rounded-lg border transition-all ${
+                scrolled 
+                  ? "text-slate-800 border-slate-300 bg-slate-50" 
+                  : "text-white border-white/20 bg-black/20 backdrop-blur-sm"
+              }`}
+            >
               {language === "vi" ? "EN" : "VI"}
             </button>
-            <button onClick={() => setIsOpen(!isOpen)} className={`${scrolled ? "text-slate-900" : "text-white"} p-1`}>
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+            <button 
+              onClick={() => setIsOpen(!isOpen)} 
+              className={`p-2 rounded-lg transition-all ${
+                scrolled 
+                  ? "text-orange-600 bg-orange-50" 
+                  : "text-orange-500 bg-black/20 backdrop-blur-sm shadow-lg border border-white/10"
+              }`}
+            >
+              {isOpen ? <X size={26} /> : <Menu size={26} />}
             </button>
           </div>
         </div>
@@ -78,7 +92,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-100 py-4 px-4 flex flex-col gap-4 animate-in slide-in-from-top-2">
+        <div className="lg:hidden absolute top-full left-0 w-full bg-white shadow-xl border-t border-gray-100 py-4 px-4 flex flex-col gap-4 animate-in slide-in-from-top-2">
           {navLinks.map((link) => (
             <a key={link.name} href={link.href} onClick={() => setIsOpen(false)} className="block px-4 py-3 text-2xl font-bold text-slate-800 hover:bg-orange-50 hover:text-orange-600 rounded-lg">
               {link.name}
