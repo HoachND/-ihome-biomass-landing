@@ -31,12 +31,12 @@ export default function Navbar() {
 
   return (
     <nav className={`fixed w-full z-[100] transition-all duration-300 ${scrolled ? "bg-white/95 backdrop-blur-md shadow-lg py-2" : "bg-black/10 backdrop-blur-[2px] py-4 border-b border-white/5"}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center">
           {/* Logo Section */}
           <div className="flex-shrink-0">
             <a href="#" className="flex items-center gap-2">
-              <img src="/images/logo-ihome.png" alt="IHOME Logo" className={`transition-all duration-300 ${scrolled ? "h-10 md:h-12" : "h-12 md:h-16"}`} />
+              <img src="/images/logo-ihome.png" alt="IHOME Logo" className={`transition-all duration-300 ${scrolled ? "h-9 md:h-12" : "h-11 md:h-16"}`} />
               <span className={`font-black text-xl md:text-2xl tracking-tighter hidden sm:block ${scrolled ? "text-slate-900" : "text-white"}`}>
                 IHOME <span className="text-orange-500">VIỆT NAM</span>
               </span>
@@ -66,14 +66,14 @@ export default function Navbar() {
           </div>
 
           {/* Mobile Right Controls - Standardized to Match VimSolar/VIMGROUP */}
-          <div className="flex lg:hidden items-center gap-2 sm:gap-3">
+          <div className="flex lg:hidden items-center gap-1.5 sm:gap-3">
             {/* Call Now Button - Mobile Only */}
             <a 
               href="tel:0974516670" 
-              className="flex items-center gap-1.5 bg-orange-500 text-white px-3 py-2 rounded-full shadow-lg animate-pulse-subtle"
+              className="flex items-center gap-1 bg-orange-500 text-white px-2.5 py-1.5 rounded-full shadow-lg animate-pulse-subtle"
             >
-              <PhoneCall size={16} fill="currentColor" />
-              <span className="text-[10px] font-black uppercase tracking-tighter">Gọi ngay</span>
+              <PhoneCall size={14} fill="currentColor" />
+              <span className="text-[9px] font-black uppercase tracking-tighter">{t("nav_call")}</span>
             </a>
 
             {/* Language Switcher */}

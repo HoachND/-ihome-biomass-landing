@@ -49,7 +49,7 @@ export default function ContactForm() {
   };
 
   return (
-    <section id="get-quote" className="py-24 bg-white relative">
+    <section id="get-quote" className="py-24 bg-white relative overflow-hidden">
       <div className="absolute top-0 right-0 w-1/3 h-full bg-orange-50/50 -z-10 skew-x-12 transform origin-top"></div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
