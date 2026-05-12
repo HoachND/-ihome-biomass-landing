@@ -43,7 +43,7 @@ export async function POST(req: Request) {
         await fetch(GAS_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
+          body: JSON.stringify({ ...data, source: "energy.vimgroup.vn - IHOME Biomass" }),
           // mode: "no-cors" is needed when calling from client, but from server we just ignore the response if it's tricky
         });
       } catch (gasError) {

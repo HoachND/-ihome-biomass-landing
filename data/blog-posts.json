@@ -1,0 +1,44 @@
+[
+  {
+    "id": "1",
+    "slug": "loi-ich-vien-nen-go-biomass",
+    "title": "Tại Sao Nên Chuyển Từ Than Đá Sang Viên Nén Gỗ Biomass?",
+    "content": "Viên nén gỗ (Wood Pellets) là giải pháp năng lượng tái tạo hoàn hảo cho lò hơi công nghiệp. Với hiệu suất nhiệt cao và hàm lượng tro thấp, Biomass giúp doanh nghiệp giảm 30-50% chi phí nhiên liệu so với than đá và dầu FO, đồng thời cắt giảm đáng kể khí thải CO2...",
+    "category": "Benefits",
+    "seoTitle": "Lợi Ích Viên Nén Gỗ | Giải Pháp Thay Thế Than Đá Cho Lò Hơi",
+    "seoDescription": "Phân tích chi tiết ưu điểm của viên nén gỗ Biomass trong sản xuất công nghiệp và bảo vệ môi trường.",
+    "seoImage": "/images/products/product-1.jpg",
+    "tags": ["Biomass", "Viên nén gỗ", "Tiết kiệm chi phí"],
+    "author": "IHOME Energy Expert",
+    "published": true,
+    "createdAt": "2026-05-12T00:00:00Z"
+  },
+  {
+    "id": "2",
+    "slug": "ihome-viet-nam-xuat-khau-biomass",
+    "title": "IHOME Việt Nam: Nâng Tầm Năng Lượng Sạch Ra Thế Giới",
+    "content": "Với quy trình sản xuất hiện đại và kiểm soát chất lượng nghiêm ngặt, các sản phẩm viên nén, củi mùn cưa của IHOME Việt Nam đã đáp ứng các tiêu chuẩn khắt khe nhất từ thị trường Nhật Bản, Hàn Quốc và EU. Chúng tôi tự hào là đơn vị cung ứng Biomass hàng đầu...",
+    "category": "Export",
+    "seoTitle": "Xuất Khẩu Năng Lượng Sinh Khối | IHOME Việt Nam Tiêu Chuẩn Quốc Tế",
+    "seoDescription": "IHOME Việt Nam tự hào cung cấp sản phẩm Biomass đạt chuẩn xuất khẩu cho các thị trường khó tính.",
+    "seoImage": "/images/products/product-2.jpg",
+    "tags": ["Xuất khẩu", "IHOME", "Chất lượng"],
+    "author": "IHOME Sales Manager",
+    "published": true,
+    "createdAt": "2026-05-12T00:00:00Z"
+  },
+  {
+    "id": "3",
+    "slug": "xu-huong-net-zero-nganh-nang-luong",
+    "title": "Xu Hướng Net Zero: Vai Trò Của Năng Lượng Sinh Khối",
+    "content": "Trong bối cảnh toàn cầu hướng tới mục tiêu phát thải ròng bằng 0 (Net Zero), năng lượng sinh khối đóng vai trò then chốt. Việc tận dụng phế phẩm nông lâm nghiệp để tạo ra năng lượng không chỉ giải quyết bài toán rác thải mà còn tạo ra chu kỳ carbon bền vững...",
+    "category": "Environment",
+    "seoTitle": "Mục Tiêu Net Zero | Năng Lượng Sinh Khối & Biến Đổi Khí Hậu",
+    "seoDescription": "Tìm hiểu cách Biomass giúp doanh nghiệp đạt được các chứng chỉ xanh và mục tiêu Net Zero.",
+    "seoImage": "/images/products/product-3.jpg",
+    "tags": ["Net Zero", "Bền vững", "Biến đổi khí hậu"],
+    "author": "VimAI Analyst",
+    "published": true,
+    "createdAt": "2026-05-12T00:00:00Z"
+  }
+]

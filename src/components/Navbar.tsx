@@ -27,6 +27,7 @@ export default function Navbar() {
     { name: t("nav_benefits"), href: "#benefits" },
     { name: t("nav_factory"), href: "#factory" },
     { name: t("nav_process"), href: "#process" },
+    { name: "Blog", href: "/blog" },
   ];
 
   return (
