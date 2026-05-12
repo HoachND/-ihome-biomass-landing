@@ -13,8 +13,9 @@ function getPost(slug: string): BlogPost | undefined {
   return posts.find((p) => p.slug === slug);
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = getPost(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params;
+  const post = getPost(resolvedParams.slug);
   if (!post) return { title: "Not Found" };
 
   // SỬ DỤNG FIELD SEO RIÊNG BIỆT NHƯ BẠN SẾP TƯ VẤN
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     openGraph: {
       title: post.seoTitle || post.titleVi,
       description: post.seoDescription || post.excerptVi,
-      images: [post.seoImage || "/images/banner-vimsolar.png"],
+      images: [post.seoImage || "/images/hero-bg.jpg"],
       type: "article",
       publishedTime: post.createdAt,
       authors: [post.author],
@@ -33,17 +34,18 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       card: "summary_large_image",
       title: post.seoTitle || post.titleVi,
       description: post.seoDescription || post.excerptVi,
-      images: [post.seoImage || "/images/banner-vimsolar.png"],
+      images: [post.seoImage || "/images/hero-bg.jpg"],
     },
   };
 }
 
-export default function BlogDetailPage({ params }: { params: { slug: string } }) {
-  const post = getPost(params.slug);
+export default async function BlogDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const post = getPost(resolvedParams.slug);
   if (!post) return <div>Post not found</div>;
 
   return (
-    <I18nProvider>
+    <>
       <BlogDetailContent post={post} />
       
       {/* Schema Markup for Google - Expert level SEO */}
@@ -54,17 +56,17 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
             "@context": "https://schema.org",
             "@type": "BlogPosting",
             "headline": post.titleVi,
-            "image": post.seoImage || "/images/banner-vimsolar.png",
+            "image": post.seoImage || "/images/hero-bg.jpg",
             "author": {
               "@type": "Organization",
-              "name": "VimSolar"
+              "name": "IHOME Việt Nam"
             },
             "publisher": {
               "@type": "Organization",
-              "name": "VimSolar",
+              "name": "IHOME Việt Nam",
               "logo": {
                 "@type": "ImageObject",
-                "url": "https://solar.vimgroup.vn/images/logo-vimsolar-nobg.png"
+                "url": "https://energy.vimgroup.vn/images/logo-ihome.png"
               }
             },
             "datePublished": post.createdAt,
@@ -72,6 +74,6 @@ export default function BlogDetailPage({ params }: { params: { slug: string } })
           })
         }}
       />
-    </I18nProvider>
+    </>
   );
 }

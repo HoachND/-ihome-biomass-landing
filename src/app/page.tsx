@@ -1,6 +1,6 @@
 "use client";
 
-import { I18nProvider } from "@/context/I18nContext";
+
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Solutions from "@/components/Solutions";
@@ -14,19 +14,17 @@ import Widgets from "@/components/Widgets";
 
 export default function Home() {
   return (
-    <I18nProvider>
-      <main>
-        <Navbar />
-        <Hero />
-        <Solutions />
-        <Benefits />
-        <About />
-        <Gallery />
-        <Process />
-        <ContactForm />
-        <Footer />
-        <Widgets />
-      </main>
-    </I18nProvider>
+    <main>
+      <Navbar />
+      <Hero />
+      <Solutions />
+      <Benefits />
+      <About />
+      <Gallery />
+      <Process />
+      <ContactForm />
+      <Footer />
+      <Widgets />
+    </main>
   );
 }

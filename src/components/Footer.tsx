@@ -32,11 +32,11 @@ export default function Footer() {
           <div>
             <h4 className="text-white font-bold mb-6 uppercase tracking-wider text-sm">{t("footer_links")}</h4>
             <ul className="space-y-4">
-              <li><a href="#home" className="hover:text-orange-400 transition-colors">{t("nav_home")}</a></li>
-              <li><a href="#products" className="hover:text-orange-400 transition-colors">{t("nav_products")}</a></li>
-              <li><a href="#benefits" className="hover:text-orange-400 transition-colors">{t("nav_benefits")}</a></li>
-              <li><a href="#factory" className="hover:text-orange-400 transition-colors">{t("nav_factory")}</a></li>
-              <li><a href="#process" className="hover:text-orange-400 transition-colors">{t("nav_process")}</a></li>
+              <li><a href="/#home" className="hover:text-orange-400 transition-colors">{t("nav_home")}</a></li>
+              <li><a href="/#products" className="hover:text-orange-400 transition-colors">{t("nav_products")}</a></li>
+              <li><a href="/#benefits" className="hover:text-orange-400 transition-colors">{t("nav_benefits")}</a></li>
+              <li><a href="/#factory" className="hover:text-orange-400 transition-colors">{t("nav_factory")}</a></li>
+              <li><a href="/#process" className="hover:text-orange-400 transition-colors">{t("nav_process")}</a></li>
             </ul>
           </div>
 

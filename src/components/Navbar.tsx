@@ -22,11 +22,11 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { name: t("nav_home"), href: "#home" },
-    { name: t("nav_products"), href: "#products" },
-    { name: t("nav_benefits"), href: "#benefits" },
-    { name: t("nav_factory"), href: "#factory" },
-    { name: t("nav_process"), href: "#process" },
+    { name: t("nav_home"), href: "/#home" },
+    { name: t("nav_products"), href: "/#products" },
+    { name: t("nav_benefits"), href: "/#benefits" },
+    { name: t("nav_factory"), href: "/#factory" },
+    { name: t("nav_process"), href: "/#process" },
     { name: "Blog", href: "/blog" },
   ];
 
@@ -36,7 +36,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center">
           {/* Logo Section */}
           <div className="flex-shrink-0">
-            <a href="#" className="flex items-center gap-2">
+            <a href="/#home" className="flex items-center gap-2">
               <img src="/images/logo-ihome.png" alt="IHOME Logo" className={`transition-all duration-300 ${scrolled ? "h-9 md:h-12" : "h-11 md:h-16"}`} />
               <span className={`font-black text-xl md:text-2xl tracking-tighter hidden sm:block ${scrolled ? "text-slate-900" : "text-white"}`}>
                 IHOME <span className="text-orange-500">VIỆT NAM</span>
@@ -60,7 +60,7 @@ export default function Navbar() {
                 {language === "vi" ? "EN" : "VI"}
               </button>
               
-              <a href="#get-quote" className={`px-6 py-2.5 rounded-full font-black text-sm transition-all hover:scale-105 flex items-center gap-2 ${scrolled ? "bg-orange-500 text-white shadow-lg" : "bg-white text-orange-600 shadow-xl"}`}>
+              <a href="/#get-quote" className={`px-6 py-2.5 rounded-full font-black text-sm transition-all hover:scale-105 flex items-center gap-2 ${scrolled ? "bg-orange-500 text-white shadow-lg" : "bg-white text-orange-600 shadow-xl"}`}>
                 {t("nav_quote")}
               </a>
             </div>
@@ -114,7 +114,7 @@ export default function Navbar() {
             </a>
           ))}
           <div className="h-px bg-gray-100 my-2"></div>
-          <a href="#get-quote" onClick={() => setIsOpen(false)} className="mx-2 px-4 py-4 bg-orange-500 text-white text-center font-black rounded-xl hover:bg-orange-600 shadow-lg flex justify-center items-center gap-3 text-lg">
+          <a href="/#get-quote" onClick={() => setIsOpen(false)} className="mx-2 px-4 py-4 bg-orange-500 text-white text-center font-black rounded-xl hover:bg-orange-600 shadow-lg flex justify-center items-center gap-3 text-lg">
             {t("nav_quote")}
           </a>
           <a href="tel:0974516670" className="mx-2 px-4 py-4 bg-slate-100 text-slate-800 text-center font-bold rounded-xl hover:bg-slate-200 flex justify-center items-center gap-3 text-lg border border-slate-200">

@@ -23,7 +23,7 @@ export default function Gallery() {
   const filteredImages = filter === "all" ? images : images.filter(img => img.category === filter);
 
   return (
-    <section id="gallery" className="py-24 bg-white relative">
+    <section id="factory" className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-12">
           <span className="text-orange-600 font-bold tracking-wider text-sm mb-4 block uppercase">

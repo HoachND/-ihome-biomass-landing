@@ -35,21 +35,32 @@ export async function POST(req: Request) {
       console.error("Lỗi gửi Telegram:", await telegramRes.text());
     }
 
-    // 2. Send to Google Apps Script
-    const GAS_URL = process.env.GAS_URL || "https://script.google.com/macros/s/AKfycbzhS8obCoEW68Gca9EG6eIdO3fmDTM-5YyybRXRrF16hNbpM1KvZly5RG01AntJkYJBdA/exec"; 
+    // 2. GỬI ĐẾN GOOGLE APPS SCRIPT
+    const PROJECT_GAS_URL = "https://script.google.com/macros/s/AKfycbzhS8obCoEW68Gca9EG6eIdO3fmDTM-5YyybRXRrF16hNbpM1KvZly5RG01AntJkYJBdA/exec";
+    const GLOBAL_GAS_URL = "https://script.google.com/macros/s/AKfycbzVK3sPVnbDfcRxk8n_5vi-gRU2X_1GTXVHuU8kcrk6Kfk3wkpqKRDJACtb3msUFRm6/exec";
+    const GLOBAL_SHEET_ID = "1LAtBjiRbwTxt7qu9XSYwzbVMNYBvC6guq-Zv_Yp3Cf0";
     
-    if (GAS_URL) {
-      try {
-        await fetch(GAS_URL, {
+    try {
+      await Promise.all([
+        // Gửi cho dự án
+        fetch(PROJECT_GAS_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
           body: JSON.stringify({ ...data, source: "energy.vimgroup.vn - IHOME Biomass" }),
-          // mode: "no-cors" is needed when calling from client, but from server we just ignore the response if it's tricky
-        });
-      } catch (gasError) {
-        console.error("Lỗi gửi Google Sheet:", gasError);
-        // Continue even if GAS fails
-      }
+        }),
+        // Gửi cho Database Tổng VIMGROUP
+        fetch(GLOBAL_GAS_URL, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify({ 
+            ...data, 
+            source: "energy.vimgroup.vn (contact-form)",
+            targetSheetId: GLOBAL_SHEET_ID 
+          }),
+        })
+      ]);
+    } catch (gasError) {
+      console.error("GAS Synchronization Error (non-blocking):", gasError);
     }
 
     return NextResponse.json({ success: true, message: "Gửi thành công!" }, { status: 200 });
